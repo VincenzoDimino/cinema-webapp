@@ -1,0 +1,222 @@
+/* ===================================================== */
+/* ================== SECTION TITLE ==================== */
+/* ===================================================== */
+
+.section-title {
+  text-align: center;
+  color: var(--accent);
+  font-size: 32px;
+  margin: 16px 0 26px;
+}
+
+/* ===================================================== */
+/* ====================== GRID ========================= */
+/* ===================================================== */
+
+.card-grid {
+  display: flex;
+  gap: 42px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ===================================================== */
+/* ==================== FILM CARD ====================== */
+/* ===================================================== */
+
+.thumb {
+  width: 220px;
+  height: 330px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.65);
+  cursor: pointer;
+  border: 3px solid transparent;
+  transition: all .28s ease;
+}
+
+.thumb:hover {
+  transform: translateY(-10px) scale(1.03);
+  border-color: var(--accent);
+  box-shadow:
+    0 0 14px var(--accent),
+    0 12px 28px rgba(0,0,0,0.80);
+}
+
+/* ===================================================== */
+/* ==================== GENRE TABS ===================== */
+/* ===================================================== */
+
+.genre-tabs {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin-bottom: 22px;
+}
+
+.tab {
+  padding: 10px 18px;
+  border-radius: 12px;
+  background: linear-gradient(90deg,#0c284b,#2b4f7c);
+  border: 2px solid rgba(255,255,255,0.10);
+  color: var(--muted);
+  cursor: pointer;
+  transition: all .25s;
+  font-size: 15px;
+}
+
+.tab:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  color: white;
+}
+
+.tab.active {
+  background: linear-gradient(90deg,#0e2642,#284c77);
+  color: #ecebab;
+  box-shadow: 0 6px 18px rgba(20,40,80,0.6);
+  border: 2px solid var(--accent);
+}
+
+/* ===================================================== */
+/* ================= CARD TITLE ======================== */
+/* ===================================================== */
+
+.card-title {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 18px;
+  color: white;
+  font-weight: 600;
+  transition: all .25s ease;
+}
+
+.film-card:hover .card-title {
+  color: var(--accent);
+  transform: translateY(-3px);
+  text-shadow: 0 0 10px rgba(245,197,66,0.8);
+}
+
+/* ===================================================== */
+/* ================== SPLASH OVERLAY =================== */
+/* ===================================================== */
+
+.splash-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  animation: splashFadeOut 1s ease forwards;
+  animation-delay: 3.6s;
+}
+
+@keyframes splashFadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* ===================================================== */
+/* ================= SPLASH CONTENT ==================== */
+/* ===================================================== */
+
+.splash-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  animation: splashScaleIn .9s ease forwards;
+}
+
+@keyframes splashScaleIn {
+  from { opacity: 0; transform: scale(.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ===================================================== */
+/* ===================== LOGO ========================== */
+/* ===================================================== */
+
+.splash-logo {
+  width: 420px;
+  max-width: 80vw;
+}
+
+/* ===================================================== */
+/* ====================== CLAP ========================= */
+/* ===================================================== */
+
+/* CONTENITORE → DISSOLVENZA UNICA */
+.clap-wrapper {
+  position: relative;
+  width: 220px;
+  margin: 0 auto;
+  opacity: 0;
+  animation: clapFadeIn .6s ease forwards;
+  animation-delay: .3s;
+}
+
+@keyframes clapFadeIn {
+  to { opacity: 1; }
+}
+
+/* ================= STECCA SUPERIORE ================= */
+/* FIX: dimensione + posizione come PNG corretto */
+.clap-top {
+  position: absolute;
+  top: 11px;
+  width: 92%;
+  left: 49.2%;
+
+  transform:
+    translateX(-50%)
+    rotate(-38deg); /* apertura iniziale */
+
+  transform-origin: 14% 88%;
+
+  z-index: 1;
+
+  animation: clapClose 1.2s ease forwards;
+  animation-delay: .6s;
+}
+
+/* ================= BASE ================= */
+
+.clap-base {
+  position: relative;
+  width: 100%;
+  z-index: 2;
+}
+
+/* ===================================================== */
+/* ================= CLAP ANIMATION ==================== */
+/* ===================================================== */
+
+@keyframes clapClose {
+  0% {
+    transform: translateX(-50%) rotate(-38deg);
+  }
+
+  /* ⚡ chiusura quasi istantanea */
+  45% {
+    transform: translateX(-50%) rotate(-17deg);
+  }
+
+  /* 🔊 colpo secco (leggermente oltre) */
+  55% {
+    transform: translateX(-50%) rotate(-19deg);
+  }
+
+  /* 🎯 ritorno immediato e STOP */
+  65% {
+    transform: translateX(-50%) rotate(-17deg);
+  }
+
+  100% {
+    transform: translateX(-50%) rotate(-17deg);
+  }
+}

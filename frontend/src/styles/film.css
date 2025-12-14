@@ -1,0 +1,106 @@
+/* ---------------- HERO CON SFONDO SFUMATO ---------------- */
+.film-hero{
+  width:100%;
+  height:420px;
+  border-radius:16px;
+  margin-top:30px;
+  background-image:var(--bg);
+  background-size:cover;
+  background-position:center;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 10px 28px rgba(0,0,0,0.6);
+}
+
+.film-hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.55);
+  backdrop-filter:blur(6px);
+}
+
+.film-hero-content{
+  position:relative;
+  z-index:5;
+  height:100%;
+  display:flex;
+  align-items:center;
+  gap:30px;
+  padding:0 40px;
+}
+
+.film-poster{
+  width:210px;
+  height:310px;
+  border-radius:12px;
+  object-fit:cover;
+  box-shadow:0 10px 20px rgba(0,0,0,0.7);
+  border:3px solid rgba(255,255,255,0.1);
+  transform:translateY(18px);
+}
+
+.film-info{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.film-title{
+  font-size:38px;
+  color:var(--accent);
+  font-weight:700;
+  margin:0 0 12px 0;
+  text-shadow:0 0 14px rgba(245,197,66,0.65);
+}
+
+.film-meta{
+  font-size:18px;
+  color:#d9e4f1;
+  opacity:0.95;
+  margin-bottom:6px;
+}
+
+/* ---------------- RIQUADRO TRAMA ---------------- */
+.film-detail{
+  max-width:1000px;
+  margin:35px auto 50px auto;
+  background:rgba(255,255,255,0.05);
+  padding:34px 40px;
+  border-radius:18px;
+  box-shadow:
+    0 12px 40px rgba(0,0,0,0.55),
+    0 0 30px rgba(255,255,255,0.05) inset;
+  backdrop-filter:blur(4px);
+  border:1px solid rgba(255,255,255,0.10);
+  animation:fadeIn .6s ease forwards;
+}
+
+.film-plot{
+  line-height:1.75;
+  color:#f7fbff;
+  font-size:18px;
+  text-align:justify;
+}
+
+/* ---------------- Animazioni base ---------------- */
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* ---------------- Fade-in PAGINA FILM ---------------- */
+.film-page {
+  animation: filmPageFade .55s ease both;
+}
+
+@keyframes filmPageFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,152 @@
+/* ===================================================== */
+/*                 PAGE WRAPPER + ANIMATION              */
+/* ===================================================== */
+
+.article-page {
+  animation: fadeSlideIn .55s ease both;
+  color: white;
+  min-height: 100vh;
+  background: #1b1e22;
+}
+
+/* ===================================================== */
+/*                         HERO                          */
+/* ===================================================== */
+
+.hero {
+  width: 100%;
+  height: 320px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+/* --- LIVELLO DI SFUMATURA (BLUR) SULLA COVER — RIDOTTO --- */
+.hero-blur {
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(1.5px);  /* <--- PRIMA ERA 3px */
+  z-index: 1;
+}
+
+/* --- VIGNETTATURA + SCURIMENTO PER VISIBILITÀ TEXT E PULSANTI --- */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+
+  background:
+    linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.25) 35%, rgba(0,0,0,0) 65%),
+    radial-gradient(ellipse at center, rgba(0,0,0,0) 40%, rgba(0,0,0,0.45) 100%);
+
+  pointer-events: none;
+}
+
+/* ===================================================== */
+/*                  BACK BUTTON (TOP)                    */
+/* ===================================================== */
+
+.back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+
+  padding: 10px 18px;
+  border-radius: 12px;
+  background: linear-gradient(90deg,#0c284b,#2b4f7c);
+  border: 2px solid rgba(255,255,255,0.20);
+  color: var(--muted);
+  cursor: pointer;
+  transition: all .25s;
+  font-size: 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 10;
+}
+
+.back-btn:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  color: white;
+}
+
+.back-btn:active {
+  background: linear-gradient(90deg,#0e2642,#284c77);
+  color: #ecebab;
+  box-shadow: 0 6px 18px rgba(20,40,80,0.6);
+  border: 2px solid var(--accent);
+}
+
+/* ===================================================== */
+/*                      ARTICLE BODY                     */
+/* ===================================================== */
+
+.article-content {
+  max-width: 880px;
+  margin: 40px auto;
+  padding: 0 20px;
+  line-height: 1.7;
+  color: #e7e7e7;
+}
+
+/* --- TITOLO: DA BIANCO → GIALLO/ARANCIONE --- */
+.article-title {
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 20px;
+  color: #ffd678;               /* <--- NUOVO COLORE */
+  text-shadow: 0 0 14px rgba(0,0,0,0.7);
+}
+
+.article-paragraph {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.article-paragraph:hover {
+  color: inherit;
+}
+
+.article-date {
+  margin-top: 40px;
+  font-size: 15px;
+  opacity: .6;
+  color: #dcdcdc;
+}
+
+/* ===================================================== */
+/*                      ANIMATIONS                       */
+/* ===================================================== */
+
+.fade-in {
+  animation: fadeIn .6s ease both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===================================================== */
+/*                       RESPONSIVE                      */
+/* ===================================================== */
+
+@media (max-width: 600px) {
+
+  .hero { height: 240px; }
+
+  .article-title {
+    font-size: 26px;
+  }
+
+  .article-paragraph {
+    font-size: 16px;
+  }
+}
