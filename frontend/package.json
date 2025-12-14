@@ -1,6 +1,7 @@
 {
   "name": "cinema-frontend",
   "version": "1.0.0",
+  "homepage": "https://vincenzodimino.github.io/cinema-webapp",
   "private": true,
   "dependencies": {
     "react": "18.2.0",
@@ -12,6 +13,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+
   },
   "browserslist": {
     "production": [
