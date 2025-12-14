@@ -1,18 +1,19 @@
 # dependencies
 node_modules/
 
-# production build
-build/
-
-# misc
-.DS_Store
+# env
 .env
 
-# IDE / editor
-.metadata/
-.vscode/
-.idea/
+# OS
+.DS_Store
 
-# logs & cache
+# logs
 npm-debug.log*
-.cache/
+yarn-debug.log*
+yarn-error.log*
+
+# build backend (se esistono)
+backend/target/
+
+# ❌ NON ignorare il build del frontend
+!frontend/build/
