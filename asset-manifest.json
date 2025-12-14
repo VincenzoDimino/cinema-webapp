@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/cinema-webapp/static/css/main.2d0642e8.css",
+    "main.js": "/cinema-webapp/static/js/main.87437707.js",
+    "static/media/logo.png": "/cinema-webapp/static/media/logo.46a130e77da89a41921b.png",
+    "static/media/clap_top.png": "/cinema-webapp/static/media/clap_top.78fed021aff359cf6214.png",
+    "static/media/clap_base.png": "/cinema-webapp/static/media/clap_base.77f053dcecb3f017405d.png",
+    "index.html": "/cinema-webapp/index.html",
+    "main.2d0642e8.css.map": "/cinema-webapp/static/css/main.2d0642e8.css.map",
+    "main.87437707.js.map": "/cinema-webapp/static/js/main.87437707.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2d0642e8.css",
+    "static/js/main.87437707.js"
+  ]
+}
