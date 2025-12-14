@@ -1,0 +1,18 @@
+# ===== Node =====
+node_modules/
+build/
+
+# ===== Eclipse / IDE =====
+.metadata/
+*.project
+*.classpath
+*.settings/
+
+# ===== Java / Maven =====
+target/
+
+# ===== OS / misc =====
+.DS_Store
+.env
+.cache/
+npm-debug.log*
