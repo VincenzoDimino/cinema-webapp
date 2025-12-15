@@ -1,13 +1,25 @@
 package com.example.cinema;
 
-import org.springframework.web.bind.annotation.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.MediaType;
-import java.util.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.example.cinema.model.Film;
 import com.example.cinema.model.News;
-import java.nio.file.Files;
 
 /**
  * REST controller exposing in-memory data for films, releases, news and images.
@@ -259,10 +271,30 @@ public class ApiController {
 
     // Serve images from classpath resources/static/images
     @GetMapping(value = "/images/{name}")
-    public ResponseEntity<byte[]> getImage(@PathVariable String name) throws Exception {
-        ClassPathResource imgFile = new ClassPathResource("static/images/" + name);
-        if(!imgFile.exists()) return ResponseEntity.notFound().build();
-        byte[] bytes = Files.readAllBytes(imgFile.getFile().toPath());
-        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(bytes);
+    public ResponseEntity<byte[]> getImage(@PathVariable String name) throws IOException {
+
+        ClassPathResource imgFile =
+                new ClassPathResource("static/images/" + name);
+
+        if (!imgFile.exists()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        byte[] bytes;
+        try (InputStream is = imgFile.getInputStream()) {
+            bytes = is.readAllBytes();
+        }
+
+        MediaType mediaType = MediaType.IMAGE_JPEG;
+        if (name.endsWith(".png")) {
+            mediaType = MediaType.IMAGE_PNG;
+        } else if (name.endsWith(".webp")) {
+            mediaType = MediaType.valueOf("image/webp");
+        }
+
+        return ResponseEntity.ok()
+                .contentType(mediaType)
+                .body(bytes);
     }
+
 }
