@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../styles/NewsArticle.css";
+import API_BASE_URL from "../config/api";
 
 export default function NewsArticle() {
   const { id } = useParams();
@@ -8,7 +9,7 @@ export default function NewsArticle() {
   const [article, setArticle] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/news/${id}`)
+    fetch(`${API_BASE_URL}/news/${id}`)
       .then((res) => res.json())
       .then((data) => setArticle(data))
       .catch((err) => console.error(err));
@@ -16,7 +17,7 @@ export default function NewsArticle() {
 
   if (!article) return <p className="loading">Caricamento...</p>;
 
-  const imageUrl = `http://localhost:8080/images/${article.cover}`;
+  const imageUrl = `${API_BASE_URL}/images/${article.cover}`;
 
   return (
     <div className="article-page">

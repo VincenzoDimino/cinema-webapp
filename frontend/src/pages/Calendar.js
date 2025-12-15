@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import '../styles/calendar.css';
 import { Link } from 'react-router-dom';
+import API_BASE_URL from "../config/api";
 
 export default function Calendar() {
   const [releases, setReleases] = useState({});
@@ -12,7 +13,7 @@ export default function Calendar() {
   const dateInputRef = useRef(null);
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/releases')
+    fetch(`${API_BASE_URL}/releases`)
       .then((r) => r.json())
       .then(setReleases);
   }, []);
@@ -122,7 +123,7 @@ export default function Calendar() {
               >
                 <img
                   className="thumb"
-                  src={'http://localhost:8080/api/images/' + f.thumbnail}
+                  src={`${API_BASE_URL}/images/` + f.thumbnail}
                   alt={f.title}
                 />
                 <div className="calendar-title">{f.title}</div>

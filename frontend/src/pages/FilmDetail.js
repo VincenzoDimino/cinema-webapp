@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/film.css';
 import { useParams } from 'react-router-dom';
+import API_BASE_URL from "../config/api";
 
 export default function FilmDetail() {
 
@@ -8,7 +9,7 @@ export default function FilmDetail() {
   const [film, setFilm] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/films/' + id)
+    fetch(`${API_BASE_URL}/films/` + id)
       .then(r => r.json())
       .then(setFilm);
   }, [id]);
@@ -21,7 +22,7 @@ export default function FilmDetail() {
       {/* ------- HERO CON SFONDO BLUR -------- */}
       <div 
         className="film-hero"
-        style={{ "--bg": `url(http://localhost:8080/api/images/${film.screenshot})` }}
+        style={{ "--bg": `url(${API_BASE_URL}/images/${film.screenshot})` }}
       >
 
         <div className="film-hero-content">
@@ -29,7 +30,7 @@ export default function FilmDetail() {
           {/* POSTER PICCOLO A SINISTRA */}
           <img
             className="film-poster"
-            src={`http://localhost:8080/api/images/${film.thumbnail}`}
+            src={`${API_BASE_URL}/images/${film.thumbnail}`}
             alt="poster"
           />
 

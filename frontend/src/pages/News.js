@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/news.css";
+import API_BASE_URL from "../config/api";
 
 export default function News() {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ export default function News() {
   useEffect(() => {
     let mounted = true;
 
-    fetch("http://localhost:8080/api/news")
+    fetch(`${API_BASE_URL}/news`)
       .then((r) => r.json())
       .then((data) => {
         if (!mounted) return;
@@ -40,7 +41,7 @@ export default function News() {
             </div>
           ) : (
             articles.map((a, i) => {
-              const img = `http://localhost:8080/api/images/${a.thumbnail}`;
+              const img = `${API_BASE_URL}/images/${a.thumbnail}`;
 
               return (
                 <article

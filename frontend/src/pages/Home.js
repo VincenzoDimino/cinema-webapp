@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import clapBase from '../assets/clap_base.png';
 import clapTop from '../assets/clap_top.png';
+import API_BASE_URL from "../config/api";
 
 /* 🔴 FLAG IN MEMORIA (resetta con refresh) */
 let splashAlreadyShown = false;
@@ -19,7 +20,7 @@ export default function Home() {
 
   useEffect(() => {
     /* ================= FETCH DATI ================= */
-    fetch('http://localhost:8080/api/genres')
+    fetch(`${API_BASE_URL}/genres`)
       .then(r => r.json())
       .then(setData);
 
@@ -94,7 +95,7 @@ export default function Home() {
               <img
                 className="thumb"
                 alt={f.title}
-                src={'http://localhost:8080/api/images/' + f.thumbnail}
+                src={`${API_BASE_URL}/images/` + f.thumbnail}
                 onClick={() => navigate('/film/' + f.id)}
               />
               <div className="card-title">
