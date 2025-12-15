@@ -14,7 +14,10 @@ import java.nio.file.Files;
  * CORS is enabled for frontend development.
  */
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {
+		  "http://localhost:3000",
+		  "https://cinema-webapp-frontend.onrender.com"
+		})
 @RequestMapping("/api")
 public class ApiController {
 
