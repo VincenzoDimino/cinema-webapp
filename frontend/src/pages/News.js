@@ -4,13 +4,19 @@ import "../styles/news.css";
 import API_BASE_URL from "../config/api";
 
 export default function News() {
+
   const navigate = useNavigate();
+
+  // Lista delle news recuperate dal backend
   const [articles, setArticles] = useState([]);
+
+  // Stato di caricamento
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let mounted = true;
 
+    // Recupera le news dal backend
     fetch(`${API_BASE_URL}/news`)
       .then((r) => r.json())
       .then((data) => {
@@ -22,6 +28,7 @@ export default function News() {
         if (mounted) setLoading(false);
       });
 
+    // Evita aggiornamenti di stato su componente smontato
     return () => (mounted = false);
   }, []);
 
@@ -99,3 +106,10 @@ export default function News() {
     </div>
   );
 }
+
+// Questo componente mostra la lista delle news.
+// I dati vengono recuperati dal backend tramite API REST
+// e ogni articolo rimanda alla pagina di dettaglio.
+
+// Un componente è montato quando è visibile a schermo e smontato quando si cambia pagina.
+// Controllo lo stato “mounted” per evitare aggiornamenti asincroni su componenti non più presenti.

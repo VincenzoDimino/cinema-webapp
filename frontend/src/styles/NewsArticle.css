@@ -1,5 +1,10 @@
+/* news-article.css - Pagina di dettaglio di una news
+   con hero cinematografica, animazioni di ingresso
+*/
+
 /* ===================================================== */
-/*                 PAGE WRAPPER + ANIMATION              */
+/* CONTENITORE PRINCIPALE DELLA PAGINA                   */
+/* Gestisce layout generale, sfondo e animazione iniziale */
 /* ===================================================== */
 
 .article-page {
@@ -10,7 +15,8 @@
 }
 
 /* ===================================================== */
-/*                         HERO                          */
+/* HERO CON IMMAGINE DI COPERTINA                         */
+/* Sezione superiore con background dinamico             */
 /* ===================================================== */
 
 .hero {
@@ -21,36 +27,36 @@
   position: relative;
 }
 
-/* --- LIVELLO DI SFUMATURA (BLUR) SULLA COVER — RIDOTTO --- */
+/* Livello di sfocatura leggera sopra la cover
+   per aumentare profondità e separazione visiva */
 .hero-blur {
   position: absolute;
   inset: 0;
-  backdrop-filter: blur(1.5px);  /* <--- PRIMA ERA 3px */
+  backdrop-filter: blur(1.5px);
   z-index: 1;
 }
 
-/* --- VIGNETTATURA + SCURIMENTO PER VISIBILITÀ TEXT E PULSANTI --- */
+/* Overlay con vignettatura e gradiente scuro
+   per migliorare leggibilità di testo e pulsanti */
 .hero-overlay {
   position: absolute;
   inset: 0;
   z-index: 2;
-
   background:
     linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.25) 35%, rgba(0,0,0,0) 65%),
     radial-gradient(ellipse at center, rgba(0,0,0,0) 40%, rgba(0,0,0,0.45) 100%);
-
   pointer-events: none;
 }
 
 /* ===================================================== */
-/*                  BACK BUTTON (TOP)                    */
+/* PULSANTE DI RITORNO                                   */
+/* Posizionato sopra la hero                             */
 /* ===================================================== */
 
 .back-btn {
   position: absolute;
   top: 20px;
   left: 20px;
-
   padding: 10px 18px;
   border-radius: 12px;
   background: linear-gradient(90deg,#0c284b,#2b4f7c);
@@ -79,7 +85,8 @@
 }
 
 /* ===================================================== */
-/*                      ARTICLE BODY                     */
+/* CONTENUTO DELL’ARTICOLO                                */
+/* Area centrale ottimizzata per la lettura              */
 /* ===================================================== */
 
 .article-content {
@@ -90,25 +97,23 @@
   color: #e7e7e7;
 }
 
-/* --- TITOLO: DA BIANCO → GIALLO/ARANCIONE --- */
+/* Titolo principale dell’articolo */
 .article-title {
   font-size: 38px;
   font-weight: 700;
   line-height: 1.25;
   margin-bottom: 20px;
-  color: #ffd678;               /* <--- NUOVO COLORE */
+  color: #ffd678;
   text-shadow: 0 0 14px rgba(0,0,0,0.7);
 }
 
+/* Paragrafi del contenuto testuale */
 .article-paragraph {
   margin-bottom: 20px;
   font-size: 18px;
 }
 
-.article-paragraph:hover {
-  color: inherit;
-}
-
+/* Data di pubblicazione */
 .article-date {
   margin-top: 40px;
   font-size: 15px;
@@ -117,7 +122,8 @@
 }
 
 /* ===================================================== */
-/*                      ANIMATIONS                       */
+/* ANIMAZIONI                                            */
+/* Fade-in e ingresso verticale                          */
 /* ===================================================== */
 
 .fade-in {
@@ -135,18 +141,23 @@
 }
 
 /* ===================================================== */
-/*                       RESPONSIVE                      */
+/* RESPONSIVE                                            */
+/* Adattamento per schermi piccoli                       */
 /* ===================================================== */
 
 @media (max-width: 600px) {
-
   .hero { height: 240px; }
 
-  .article-title {
-    font-size: 26px;
-  }
+  .article-title { font-size: 26px; }
 
-  .article-paragraph {
-    font-size: 16px;
-  }
+  .article-paragraph { font-size: 16px; }
 }
+
+/* Questo file definisce lo stile della pagina di dettaglio
+   di una singola news:
+   hero con immagine di copertina e overlay cinematografico,
+   layout centrale ottimizzato per la lettura,
+   pulsante di navigazione per il ritorno,
+   animazioni di ingresso fluide
+   e adattamento responsive per dispositivi mobili.
+*/

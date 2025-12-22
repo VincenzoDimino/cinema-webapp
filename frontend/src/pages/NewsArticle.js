@@ -4,10 +4,17 @@ import "../styles/NewsArticle.css";
 import API_BASE_URL from "../config/api";
 
 export default function NewsArticle() {
+
+  // ID dell’articolo letto dall’URL
   const { id } = useParams();
+
+  // Navigazione programmatica
   const navigate = useNavigate();
+
+  // Stato che contiene l’articolo selezionato
   const [article, setArticle] = useState(null);
 
+  // Recupera l’articolo dal backend in base all’ID
   useEffect(() => {
     fetch(`${API_BASE_URL}/news/${id}`)
       .then((res) => res.json())
@@ -15,15 +22,20 @@ export default function NewsArticle() {
       .catch((err) => console.error(err));
   }, [id]);
 
+  // Stato di caricamento
   if (!article) return <p className="loading">Caricamento...</p>;
 
+  // URL dell’immagine di copertina
   const imageUrl = `${API_BASE_URL}/images/${article.cover}`;
 
   return (
     <div className="article-page">
-      
+
       {/* HERO */}
-      <div className="hero" style={{ backgroundImage: `url(${imageUrl})` }}>
+      <div
+        className="hero"
+        style={{ backgroundImage: `url(${imageUrl})` }}
+      >
         <div className="hero-overlay"></div>
 
         <button className="back-btn" onClick={() => navigate(-1)}>
@@ -47,3 +59,7 @@ export default function NewsArticle() {
     </div>
   );
 }
+
+// Questo componente mostra il dettaglio di una news.
+// L’articolo viene recuperato dal backend tramite ID
+// e visualizzato con immagine di copertina e contenuto testuale.

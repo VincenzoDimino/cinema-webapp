@@ -1,3 +1,7 @@
+/* =============================== */
+/* STILI PAGINA DETTAGLIO FILM     */
+/* =============================== */
+
 /* ---------------- HERO CON SFONDO SFUMATO ---------------- */
 .film-hero{
   width:100%;
@@ -104,3 +108,7 @@
     transform: translateY(0);
   }
 }
+
+/* Questo file gestisce lo stile della pagina di dettaglio film.
+   Include l’hero con sfondo sfocato, le informazioni principali,
+   il riquadro della trama e le animazioni di ingresso della pagina. */

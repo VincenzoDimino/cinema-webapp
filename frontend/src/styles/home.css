@@ -1,4 +1,10 @@
 /* ===================================================== */
+/* STILI HOME PAGE + SPLASH SCREEN CINEMA WEB APP        */
+/* Gestisce layout, card film, tab generi e animazione   */
+/* splash iniziale con logo e clap cinematografico       */
+/* ===================================================== */
+
+/* ===================================================== */
 /* ================== SECTION TITLE ==================== */
 /* ===================================================== */
 
@@ -164,7 +170,7 @@
   to { opacity: 1; }
 }
 
-/* ================= STECCA SUPERIORE ================= */
+/* ================= STECCA SUPERIORE DEL CLAP ================= */
 /* FIX: dimensione + posizione come PNG corretto */
 .clap-top {
   position: absolute;
@@ -184,7 +190,7 @@
   animation-delay: .6s;
 }
 
-/* ================= BASE ================= */
+/* ================= BASE DEL CLAP ================= */
 
 .clap-base {
   position: relative;
@@ -201,17 +207,17 @@
     transform: translateX(-50%) rotate(-38deg);
   }
 
-  /* ⚡ chiusura quasi istantanea */
+  /* chiusura quasi istantanea */
   45% {
     transform: translateX(-50%) rotate(-17deg);
   }
 
-  /* 🔊 colpo secco (leggermente oltre) */
+  /* colpo secco (leggermente oltre) */
   55% {
     transform: translateX(-50%) rotate(-19deg);
   }
 
-  /* 🎯 ritorno immediato e STOP */
+  /* ritorno immediato e STOP */
   65% {
     transform: translateX(-50%) rotate(-17deg);
   }
@@ -220,3 +226,7 @@
     transform: translateX(-50%) rotate(-17deg);
   }
 }
+
+/* Questo file gestisce lo stile della Home page:
+   visualizzazione dei film per genere, animazioni delle card
+   e splash screen iniziale con logo e clap cinematografico. */

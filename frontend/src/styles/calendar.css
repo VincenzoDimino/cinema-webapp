@@ -1,3 +1,7 @@
+/* ========================= */
+/* STILI CALENDARIO USCITE   */
+/* ========================= */
+
 .section-title{
   color:var(--accent);
   text-align:center;
@@ -95,7 +99,10 @@
 /* ANIMAZIONE NETFLIX      */
 /* ======================= */
 
-.netflix-enter{animation:fadeSlideIn .45s ease both;}
+.netflix-enter{
+  animation:fadeSlideIn .45s ease both;
+}
+
 .netflix-item{
   opacity:0;
   animation:itemEnter .55s cubic-bezier(.32,.08,.24,1) forwards;
@@ -112,7 +119,7 @@
 }
 
 /* ============================== */
-/* ANIMAZIONE POPUP DATE PICKER */
+/* ANIMAZIONE POPUP DATE PICKER   */
 /* ============================== */
 
 .date-wrapper{
@@ -137,3 +144,7 @@
     transform:translateY(0) scale(1);
   }
 }
+
+/* Questo file definisce lo stile del calendario uscite.
+   Include layout, bottoni, card dei film e animazioni
+   per rendere l’interfaccia dinamica */

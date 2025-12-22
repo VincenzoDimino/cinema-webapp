@@ -4,20 +4,33 @@ import { Link } from 'react-router-dom';
 import API_BASE_URL from "../config/api";
 
 export default function Calendar() {
+
+  // Stato che contiene i film raggruppati per periodo di uscita
   const [releases, setReleases] = useState({});
+
+  // Periodo attivo (questa settimana, prossima, ecc.)
   const [active, setActive] = useState('this');
+
+  // Data selezionata manualmente dall’utente
   const [selectedDate, setSelectedDate] = useState(null);
+
+  // Film filtrati in base alla data scelta
   const [dateFilteredFilms, setDateFilteredFilms] = useState([]);
+
+  // Mostra/nasconde il date picker
   const [showDatePicker, setShowDatePicker] = useState(false);
 
+  // Riferimento all’input di tipo date
   const dateInputRef = useRef(null);
 
+  // Recupera le uscite dal backend al caricamento del componente
   useEffect(() => {
     fetch(`${API_BASE_URL}/releases`)
       .then((r) => r.json())
       .then(setReleases);
   }, []);
 
+  // Etichette dei periodi mostrati all’utente
   const groups = {
     previous: 'Scorsa settimana',
     this: 'Questa settimana',
@@ -26,6 +39,7 @@ export default function Calendar() {
     week3: 'Tra 3 settimane'
   };
 
+  // Gestisce la selezione manuale di una data
   function handleDateChange(e) {
     const date = e.target.value;
     setSelectedDate(date);
@@ -33,6 +47,7 @@ export default function Calendar() {
     if (date) {
       setActive(null);
 
+      // Unisce tutti i film ed elimina i duplicati
       const allFilms = Array.from(
         new Map(
           Object.values(releases)
@@ -41,6 +56,7 @@ export default function Calendar() {
         ).values()
       );
 
+      // Filtra i film in base alla data di uscita
       const filtered = allFilms.filter((f) => f.releaseDate === date);
       setDateFilteredFilms(filtered);
     } else {
@@ -49,12 +65,14 @@ export default function Calendar() {
     }
   }
 
+  // Mostra o nasconde il selettore di data
   function handleChoosePeriod() {
     const newState = !showDatePicker;
     setShowDatePicker(newState);
     setSelectedDate(null);
     setActive(null);
 
+    // Forza l’apertura del date picker (compatibilità browser)
     setTimeout(() => {
       if (newState && dateInputRef.current) {
         try {
@@ -66,7 +84,10 @@ export default function Calendar() {
     }, 60);
   }
 
-  const filmsToShow = selectedDate ? dateFilteredFilms : releases[active] || [];
+  // Decide quali film mostrare in base alla selezione
+  const filmsToShow = selectedDate
+    ? dateFilteredFilms
+    : releases[active] || [];
 
   return (
     <div className="container">
@@ -138,3 +159,7 @@ export default function Calendar() {
     </div>
   );
 }
+
+// Questo componente mostra il calendario delle uscite.
+// I dati arrivano dal backend tramite API REST, vengono filtrati per periodo o data scelta e visualizzati dinamicamente.
+// Le immagini sono servite direttamente dal backend.

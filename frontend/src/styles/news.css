@@ -1,13 +1,16 @@
-/* news.css - News list with Netflix-style animations + consistent app look */
+/* news.css - Lista delle news con animazioni stile Netflix
+   e aspetto coerente con il resto dell’app */
 
-/* reuse app variables if present, otherwise fallback */
+/* Riutilizza le variabili globali se presenti,
+   altrimenti usa valori di fallback */
+   
 :root{
   --accent: #f5c542;
   --bg-dark: #2d2f33;
   --muted: rgba(236,241,245,0.9);
 }
 
-/* Page title (consistent with home) */
+/* Titolo della pagina (coerente con la Home) */
 .section-title {
   text-align: center;
   color: var(--accent);
@@ -17,7 +20,7 @@
   animation: fadeIn .45s ease both;
 }
 
-/* Container for list */
+/* Contenitore della lista */
 .news-list {
   width: 100%;
   max-width: 1100px;
@@ -28,7 +31,8 @@
   padding: 0 16px;
 }
 
-/* Single news item layout: image left, text right */
+/* Layout della singola news:
+   immagine a sinistra, testo a destra */
 .news-item {
   display: grid;
   grid-template-columns: 240px 1fr;
@@ -40,7 +44,7 @@
   transition: transform .28s ease, box-shadow .28s ease;
 }
 
-/* clickable thumb wrapper */
+/* Contenitore cliccabile della miniatura */
 .news-thumb-wrap{
   display:inline-block;
   background: transparent;
@@ -51,7 +55,7 @@
   border: none;
 }
 
-/* thumbnail style */
+/* Stile della miniatura */
 .news-thumb {
   width: 240px;
   height: 350px;
@@ -63,7 +67,7 @@
   display: block;
 }
 
-/* hover zoom + glow */
+/* Effetto hover: zoom e bagliore */
 .news-thumb-wrap:hover .news-thumb,
 .news-thumb:focus {
   transform: translateY(-10px) scale(1.05);
@@ -73,17 +77,17 @@
     0 20px 40px rgba(0,0,0,0.75);
 }
 
-/* lift row on hover */
+/* Sollevamento della riga al passaggio del mouse */
 .news-item:hover {
   transform: translateY(-10px);
 }
 
-/* right column */
+/* Colonna destra */
 .news-content {
   padding-top: 8px;
 }
 
-/* category */
+/* Categoria */
 .news-meta {
   color: #ffd67a;
   font-weight: 700;
@@ -92,7 +96,7 @@
   margin-bottom: 10px;
 }
 
-/* TITLE — enlarged to 44px */
+/* Titolo — dimensione grande (44px) */
 .news-title {
   font-size: 44px;
   line-height: 1.05;
@@ -104,7 +108,7 @@
   text-shadow: 0 6px 18px rgba(2,4,8,0.55);
 }
 
-/* glow on hover */
+/* Effetto glow al passaggio del mouse */
 .news-title.glow,
 .news-thumb-wrap:hover + .news-content .news-title,
 .news-content .news-title:hover {
@@ -115,7 +119,7 @@
   transform: translateY(-2px);
 }
 
-/* preview text */
+/* Testo di anteprima */
 .news-preview {
   color: #cbd9ea;
   font-size: 17px;
@@ -124,7 +128,7 @@
   margin: 0 0 14px;
 }
 
-/* actions */
+/* Azioni */
 .news-actions {
   margin-top: 12px;
 }
@@ -140,12 +144,13 @@
   box-shadow: 0 6px 18px rgba(18,28,64,0.45);
   transition: transform .18s, box-shadow .18s;
 }
+
 .ghost-btn:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 30px rgba(18,28,64,0.6);
 }
 
-/* responsive */
+/* Responsive */
 @media (max-width: 900px) {
   .news-item {
     grid-template-columns: 1fr;
@@ -164,7 +169,7 @@
   }
 }
 
-/* animations */
+/* Animazioni */
 .netflix-enter { animation: fadeSlideIn .42s ease both; }
 .netflix-item { opacity: 0; animation: itemEnter .55s cubic-bezier(.32,.08,.24,1) forwards; }
 
@@ -172,9 +177,22 @@
   from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
 @keyframes itemEnter {
   0% { opacity: 0; transform: translateX(32px) scale(.97); }
   100% { opacity: 1; transform: translateX(0) scale(1); }
 }
 
-@keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* Questo file definisce lo stile della pagina News:
+   struttura della lista degli articoli,
+   layout a griglia con immagine e contenuto testuale,
+   animazioni di ingresso in stile Netflix,
+   effetti hover su immagini e titoli
+   e adattamento responsive per dispositivi mobili.
+ */

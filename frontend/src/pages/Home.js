@@ -7,18 +7,27 @@ import clapBase from '../assets/clap_base.png';
 import clapTop from '../assets/clap_top.png';
 import API_BASE_URL from "../config/api";
 
-/* 🔴 FLAG IN MEMORIA (resetta con refresh) */
+/* FLAG IN MEMORIA (resetta con refresh) */
 let splashAlreadyShown = false;
 
 export default function Home() {
+
+  // Stato che contiene i film divisi per genere
   const [data, setData] = useState({ drammatico: [], sentimentale: [] });
+
+  // Genere attualmente selezionato
   const [selected, setSelected] = useState('drammatico');
+
+  // Chiave usata per riavviare l’animazione delle card
   const [animKey, setAnimKey] = useState(0);
+
+  // Controlla la visualizzazione dello splash screen
   const [showSplash, setShowSplash] = useState(false);
 
   const navigate = useNavigate();
 
   useEffect(() => {
+
     /* ================= FETCH DATI ================= */
     fetch(`${API_BASE_URL}/genres`)
       .then(r => r.json())
@@ -37,6 +46,7 @@ export default function Home() {
     }
   }, []);
 
+  // Cambia genere e riattiva l’animazione
   function changeGenre(g) {
     if (g === selected) return;
     setSelected(g);
@@ -108,3 +118,7 @@ export default function Home() {
     </>
   );
 }
+
+// Questo componente rappresenta la home page dell’app.
+// Mostra uno splash screen iniziale e una selezione di film
+// suddivisi per genere, recuperati dal backend tramite API REST.

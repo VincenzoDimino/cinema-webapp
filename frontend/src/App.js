@@ -9,31 +9,48 @@ import './styles/global.css';
 import API_BASE_URL from "./config/api";
 
 /**
- * App component with React Router routes.
- * Navigation links use <Link> for client-side routing.
+ * Componente principale dell'applicazione.
+ * Gestisce il routing tramite React Router
+ * e la navigazione tra le varie pagine.
  */
-export default function App(){
+export default function App() {
   return (
     <BrowserRouter>
-      <div className='app'>
-        <header className='topbar'>
-          <Link to="/"><img src={`${API_BASE_URL}/images/logo.png`} className='logo' alt='logo'/></Link>
+      <div className="app">
+
+        {/* HEADER CON LOGO E NAVIGAZIONE */}
+        <header className="topbar">
+          <Link to="/">
+            <img
+              src={`${API_BASE_URL}/images/logo.png`}
+              className="logo"
+              alt="logo"
+            />
+          </Link>
+
           <nav>
-            <Link className='navbtn' to="/">Home</Link>
-            <Link className='navbtn' to="/calendar">Calendario Uscite</Link>
-            <Link className='navbtn' to="/news">News</Link>
+            <Link className="navbtn" to="/">Home</Link>
+            <Link className="navbtn" to="/calendar">Calendario Uscite</Link>
+            <Link className="navbtn" to="/news">News</Link>
           </nav>
         </header>
-        <main className='content'>
+
+        {/* CONTENUTO PRINCIPALE */}
+        <main className="content">
           <Routes>
-            <Route path="/" element={<Home/>}/>
-            <Route path="/calendar" element={<Calendar/>}/>
-            <Route path="/news" element={<News/>}/>
-            <Route path="/news/:id" element={<NewsArticle/>}/>
-            <Route path="/film/:id" element={<FilmDetail/>}/>
+            <Route path="/" element={<Home />} />
+            <Route path="/calendar" element={<Calendar />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/news/:id" element={<NewsArticle />} />
+            <Route path="/film/:id" element={<FilmDetail />} />
           </Routes>
         </main>
+
       </div>
     </BrowserRouter>
   );
 }
+
+// Questo componente definisce la struttura dell’app.
+// Usa React Router per gestire le rotte e consente
+// la navigazione tra le pagine senza ricaricare la pagina.

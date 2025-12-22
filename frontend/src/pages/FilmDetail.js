@@ -5,22 +5,27 @@ import API_BASE_URL from "../config/api";
 
 export default function FilmDetail() {
 
+  // ID del film letto dall’URL
   const { id } = useParams();
+
+  // Stato che contiene i dati del film selezionato
   const [film, setFilm] = useState(null);
 
+  // Recupera i dettagli del film dal backend
   useEffect(() => {
     fetch(`${API_BASE_URL}/films/` + id)
       .then(r => r.json())
       .then(setFilm);
   }, [id]);
 
+  // Stato di caricamento
   if (!film) return <div className="container">Caricamento...</div>;
 
   return (
     <div className="container film-page">   {/* fade-in page */}
 
       {/* ------- HERO CON SFONDO BLUR -------- */}
-      <div 
+      <div
         className="film-hero"
         style={{ "--bg": `url(${API_BASE_URL}/images/${film.screenshot})` }}
       >
@@ -53,3 +58,7 @@ export default function FilmDetail() {
     </div>
   );
 }
+
+// Questo componente mostra il dettaglio di un film selezionato.
+// L’ID viene letto dall’URL e usato per recuperare i dati dal backend.
+// Le immagini sono servite direttamente dal backend.
