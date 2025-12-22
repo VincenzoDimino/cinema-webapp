@@ -22,21 +22,43 @@ import com.example.cinema.model.Film;
 import com.example.cinema.model.News;
 
 /**
- * REST controller exposing in-memory data for films, releases, news and images.
- * CORS is enabled for frontend development.
+ * Controller REST che espone dati in-memory relativi a:
+ * - film
+ * - uscite
+ * - news
+ * - immagini
+ * 
+ * Il CORS (Cross-Origin Resource Sharing) è abilitato per permettere l'accesso dal frontend
+ * durante lo sviluppo e dal sito deployato.
  */
 @RestController
-@CrossOrigin(origins = {
-		  "http://localhost:3000",
-		  "https://cinema-webapp-frontend.onrender.com"
-		})
+@CrossOrigin(
+    origins = {
+        "http://localhost:3000",
+        "https://cinema-webapp-frontend.onrender.com"
+    }
+)
 @RequestMapping("/api")
 public class ApiController {
 
+    // Lista che contiene tutti i film caricati in memoria
     private List<Film> films = new ArrayList<>();
+
+    // Lista che contiene tutte le news disponibili
     private List<News> newsPool = new ArrayList<>();
 
- // Initialize in-memory data
+    /**
+     * Costruttore del controller.
+     * 
+     * Qui vengono inizializzati tutti i dati in memoria:
+     * - film
+     * - news
+     * 
+     * Non viene utilizzato un database: i dati sono statici
+     * e servono solo a scopo dimostrativo.
+     */
+    
+ // INIZIALIZZAZIONE FILM
     public ApiController() {
         films.add(new Film(1L,"The Godfather",1972,"USA","Francis Ford Coppola","drammatico","the_godfather_thumbnail.jpg","the_godfather_screenshot.jpg",
                 "Anni Quaranta. Come è consuetudine, durante il rinfresco per festeggiare le nozze della figlia Conny con Carlo, il \"padrino\" don Vito Corleone promette assistenza e protezione a familiari e amici. Invia il figliastro Tom Hagen in California per convincere in ogni modo il produttore Jack Woltz a scritturare il cantante Johnny nel suo prossimo film. Woltz non acconsente. Tom allora lo costringe ad accettare con un \"avvertimento\": l'uccisione del suo cavallo di razza preferito. Sollozzo, a nome della potente \"famiglia\" Tartaglia, chiede a Corleone finanziamenti e appoggi per il traffico di droga. Il rifiuto scatena una lotta cruenta tra le due cosche: lo stesso don Vito viene ferito gravemente; il figlio minore Michael lo salva da un secondo attentato. Michael, poi, scavalcando l'irruento fratello Sonny e Tom, temporeggiatore, organizza un incontro con Sollozzo e con il corrotto capitano di polizia McCluskey uccidendoli entrambi.","1972-03-24"));
@@ -52,7 +74,7 @@ public class ApiController {
         films.add(new Film(6L,"La La Land",2016,"USA","Damien Chazelle","sentimentale","lalaland_thumbnail.jpg","lalaland_screenshot.jpg",
                 "L'intensa e burrascosa storia d'amore tra un'attrice e un musicista che si sono appena trasferiti a Los Angeles in cerca di fortuna. Mia è un'aspirante attrice che, tra un provino e l'altro, serve cappuccini alle star del cinema. Sebastian è un musicista jazz che sbarca il lunario suonando nei piano bar. Dopo alcuni incontri casuali, fra Mia e Sebastian esplode una travolgente passione nutrita dalla condivisione di aspirazioni comuni, da sogni intrecciati e da una complicità fatta di incoraggiamento e sostegno reciproco. Ma quando iniziano ad arrivare i primi successi, i due si dovranno confrontare con delle scelte che metteranno in discussione il loro rapporto. La minaccia più grande sarà rappresentata proprio dai sogni che condividono e dalle loro ambizioni professionali.","2016-12-09"));
 
-     // 12 articoli realistici e completi
+     // INIZIALIZZAZIONE NEWS
         newsPool.add(new News(
             1L,
             "Primo trailer di Eclipse: il thriller sci-fi che sta facendo impazzire il web",
@@ -220,12 +242,20 @@ public class ApiController {
     //           ENDPOINTS
     // -----------------------------
 
-    // Return films grouped by genre
+    // Restituisce i film raggruppati per genere 
+    // Endpoint: GET /api/genres
+    
     @GetMapping("/genres")
-    public Map<String, List<Film>> getByGenre() {
+    public Map<String, List<Film>> getByGenre() { 
+    	
+    	// Mappa con chiave = genere e valore = lista di film
+    	
         Map<String, List<Film>> map = new HashMap<>();
         map.put("drammatico", new ArrayList<>());
         map.put("sentimentale", new ArrayList<>());
+        
+        // Ciclo su tutti i film per dividerli per genere
+        
         for(Film f: films){
             if("drammatico".equalsIgnoreCase(f.genre)) map.get("drammatico").add(f);
             if("sentimentale".equalsIgnoreCase(f.genre)) map.get("sentimentale").add(f);
@@ -233,33 +263,41 @@ public class ApiController {
         return map;
     }
 
-    // Return film by ID
+    // Restituisce un film per ID
+    // Endpoint: GET /api/films/{id}
+    
     @GetMapping("/films/{id}")
     public Film getFilm(@PathVariable Long id){
-        return films.stream().filter(f -> f.id.equals(id)).findFirst().orElse(null);
+    	// Ricerca del film con l'ID richiesto tramite stream
+        return films.stream().filter(f -> f.id.equals(id)).findFirst().orElse(null); 
     }
 
-    // Releases grouped by relative weeks
+    // Restituisce le uscite divise per settimana
+    // Endpoint: GET /api/releases
+    
     @GetMapping("/releases")
     public Map<String, List<Film>> getReleases(){
-        Map<String, List<Film>> r = new HashMap<>();
-        r.put("previous", Arrays.asList(films.get(0), films.get(1)));
-        r.put("this", Arrays.asList(films.get(2), films.get(3)));
-        r.put("week1", Arrays.asList(films.get(4), films.get(5)));
-        r.put("week2", Arrays.asList(films.get(1), films.get(4)));
-        r.put("week3", Arrays.asList(films.get(0), films.get(5)));
+        Map<String, List<Film>> r = new HashMap<>(); // Mappa che rappresenta le uscite per periodo
+        r.put("previous", Arrays.asList(films.get(0), films.get(1))); // Film già usciti
+        r.put("this", Arrays.asList(films.get(2), films.get(3))); // Film della settimana corrente
+        r.put("week1", Arrays.asList(films.get(4), films.get(5))); // Film in uscita nella prossima settimana
+        r.put("week2", Arrays.asList(films.get(1), films.get(4))); // Film in uscita tra due settimane
+        r.put("week3", Arrays.asList(films.get(0), films.get(5))); // Film in uscita tra tre settimane
         return r;
     }
 
-    // Return 3 random news from pool
+    // Restituisce 3 news casuali.
+    // Endpoint: GET /api/news
+    
     @GetMapping("/news")
     public List<News> getRandomNews(){
-        Collections.shuffle(newsPool);
-        return newsPool.subList(0,3);
+        Collections.shuffle(newsPool); // Mischia casualmente la lista delle news
+        return newsPool.subList(0,3); // Restituisce solo le prime 3
     }
 
     // -----------------------------
-    //   Return single news by ID
+    // Restituisce una singola news dato l'ID.
+    // Endpoint: GET /api/news/{id}
     // -----------------------------
     @GetMapping("/news/{id}")
     public News getNewsById(@PathVariable Long id){
@@ -269,32 +307,41 @@ public class ApiController {
                 .orElse(null);
     }
 
-    // Serve images from classpath resources/static/images
+    // Restituisce un'immagine presente nelle risorse statiche.
+    // Endpoint: GET /api/images/{name}
+    
     @GetMapping(value = "/images/{name}")
     public ResponseEntity<byte[]> getImage(@PathVariable String name) throws IOException {
-
+    	
+    	// Carica l'immagine dalla cartella resources/static/images
         ClassPathResource imgFile =
                 new ClassPathResource("static/images/" + name);
-
+        // Se l'immagine non esiste restituisce 404
         if (!imgFile.exists()) {
             return ResponseEntity.notFound().build();
         }
 
         byte[] bytes;
-        try (InputStream is = imgFile.getInputStream()) {
+        try (InputStream is = imgFile.getInputStream()) { // Lettura del file come array di byte
             bytes = is.readAllBytes();
         }
 
-        MediaType mediaType = MediaType.IMAGE_JPEG;
+        MediaType mediaType = MediaType.IMAGE_JPEG; // Imposta il tipo MIME corretto in base all'estensione
         if (name.endsWith(".png")) {
             mediaType = MediaType.IMAGE_PNG;
         } else if (name.endsWith(".webp")) {
             mediaType = MediaType.valueOf("image/webp");
         }
 
-        return ResponseEntity.ok()
+        return ResponseEntity.ok() // Restituisce l'immagine come risposta HTTP
                 .contentType(mediaType)
                 .body(bytes);
     }
 
 }
+
+/**
+ * Controller REST che espone API per film, news e immagini.
+ * I dati sono in memoria e non viene utilizzato un database.
+ * Il CORS è abilitato per consentire l’accesso dal frontend.
+ */

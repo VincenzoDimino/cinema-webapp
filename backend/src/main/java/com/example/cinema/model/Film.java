@@ -1,10 +1,11 @@
 package com.example.cinema.model;
 
 /**
- * Simple POJO representing a Film.
- * Public fields used for brevity (serializable by Jackson).
+ * Modello che rappresenta un Film.
+ * I dati sono gestiti in memoria, senza database.
  */
 public class Film {
+
     public Long id;
     public String title;
     public int year;
@@ -16,9 +17,24 @@ public class Film {
     public String plot;
     public String releaseDate;
 
+    // Costruttore vuoto richiesto dalla libreria Jackson 
+    // per la serializzazione/deserializzazione JSON.
     public Film() {}
 
-    public Film(Long id, String title, int year, String country, String director, String genre, String thumbnail, String screenshot, String plot, String releaseDate) {
+    // Costruttore completo per creare manualmente i film
+    // nel backend senza usare un database.
+    public Film(
+            Long id,
+            String title,
+            int year,
+            String country,
+            String director,
+            String genre,
+            String thumbnail,
+            String screenshot,
+            String plot,
+            String releaseDate
+    ) {
         this.id = id;
         this.title = title;
         this.year = year;

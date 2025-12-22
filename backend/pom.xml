@@ -29,7 +29,7 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- Jackson per serializzazione JSON (in realtà già incluso nel web starter) -->
+        <!-- Jackson per serializzazione JSON (già incluso nel web starter) -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
@@ -38,7 +38,7 @@
 
     <build>
         <plugins>
-            <!-- Plugin Spring Boot (versione già gestita dal parent) -->
+            <!-- Plugin Spring Boot (gestita dal parent) -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
